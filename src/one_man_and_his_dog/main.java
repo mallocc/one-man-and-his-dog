@@ -1,7 +1,5 @@
 package one_man_and_his_dog;
 
-import java.util.ArrayList;
-
 public class main
 {
 	public static void main(String[] args) {
