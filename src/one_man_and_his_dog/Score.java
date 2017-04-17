@@ -2,22 +2,22 @@ package one_man_and_his_dog;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Score  implements Serializable {
     /**
 	 * 
 	 */
-	private int score;
+	private Integer score;
     private String name;
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
-
     public String getName() {
         return name;
     }
 
-    public Score(String name, int score) {
+    public Score(String name, Integer score) {
         this.score = score;
         this.name = name;
     }

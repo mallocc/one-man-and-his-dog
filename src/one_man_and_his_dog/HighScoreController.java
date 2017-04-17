@@ -9,31 +9,32 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
+@SuppressWarnings("serial")
 public class HighScoreController extends JPanel
 {
 	HighScoreManager hcm = new HighScoreManager();
 	
 	HighScoreController()
 	{
-		
+		init();
 	}
 	
 	void init()
 	{
 		hcm.loadScoreFile();
+		
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
 		this.setLayout(layout);
 		
 		// setup layout
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.5;
-
+		c.fill = GridBagConstraints.VERTICAL;
 		c.gridx = 0;
 		c.gridy = 0;
 		this.add(new JLabel("High Scores"), c);
@@ -41,12 +42,26 @@ public class HighScoreController extends JPanel
 		String[] columns = new String[] {
 		            "Id", "Name", "Score"
 		        };
-		JTable table = new JTable(hcm.getScores(), columns);
+		DefaultTableModel tableModel = new DefaultTableModel(columns,0);
+
+	    int i = 0;
+	    int x = hcm.scores.size();
+//		System.out.println(x);
+	    while (i < x) {
+	    	Score s = hcm.scores.get(i);
+//			System.out.print((i+1) + "; " + hcm.getHighScoreString(s));
+			Object[] data = { i+1, s.getName(), String.valueOf(s.getScore()) };
+			tableModel.addRow(data);
+			i++;
+		}
+		
+		JTable table = new JTable(tableModel);
 		
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(new JScrollPane(table));
 		
+		this.revalidate();
 	}
 	
 }

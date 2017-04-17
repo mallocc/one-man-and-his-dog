@@ -2,14 +2,10 @@ package one_man_and_his_dog;
 
 import java.util.*;
 import java.io.*;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 
 public class HighScoreManager {
     // An array list of the type "score" we will use to work with the scores inside the class
-    private ArrayList<Score> scores;
+    ArrayList<Score> scores;
 
     // The name of the file where the high scores will be saved
     private static final String HIGHSCORE_FILE = "scores.dat";
@@ -23,26 +19,20 @@ public class HighScoreManager {
         scores = new ArrayList<Score>();
     }
     
-	private ArrayList<Score> getScores() {
+	public ArrayList<Score> getScores() {
 	    loadScoreFile();
 	    sort();
 	    return scores;
 	}
 	
-
-	private void sort() {
-	    ScoreComparator comparator = new ScoreComparator();
-	    Collections.sort(scores, comparator);
-	}
-	
-	public void addScore(String name, int score) {
+	public void addScore(String name, Integer score) {
 	    loadScoreFile();
 	    scores.add(new Score(name, score));
 	    updateScoreFile();
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void loadScoreFile() {
+	public void loadScoreFile() {
 	    try {
 	        inputStream = new ObjectInputStream(new FileInputStream(HIGHSCORE_FILE));
 	        scores = (ArrayList<Score>) inputStream.readObject();
@@ -84,7 +74,7 @@ public class HighScoreManager {
 	    }
 	}
 	
-	public String getHighScoreString() {
+	public String getHighScoreStrings() {
 	    String highScoreString = "";
 	    int maxEntries = 10;
 	
@@ -97,12 +87,23 @@ public class HighScoreManager {
 	        x = maxEntries;
 	    }
 	    while (i < x) {
-	        highScoreString += (i + 1) + ".\t" + scores.get(i).getName() + "\t\t" + scores.get(i).getScore() + "\n";
+	        highScoreString += (i + 1) + ".\t" + getHighScoreString(scores.get(i));
 	        i++;
 	    }
 	    return highScoreString;
 	}
 
+	public String getHighScoreString(Score score) {
+	    String highScoreString = "";
+	    highScoreString = score.getName() + "\t\t" + score.getScore() + "\n";
+	    return highScoreString;
+	}
+
+	private void sort() {
+	    ScoreComparator comparator = new ScoreComparator();
+	    Collections.sort(scores, comparator);
+	}
+	
 	private class ScoreComparator implements Comparator<Score> {
         public int compare(Score score1, Score score2) {
 
