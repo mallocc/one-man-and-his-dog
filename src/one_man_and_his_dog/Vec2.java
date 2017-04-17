@@ -35,4 +35,7 @@ public class Vec2
             x *= a;
             y *= a;
         }
+        Vec2 scaled(float a){
+            return new Vec2(x * a, y * a);
+        }
 }

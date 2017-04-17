@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.MouseInfo;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,7 @@ public class View extends JFrame
 {
         public static int WIDTH = 320;
         public static int HEIGHT = 480;
-  
+        
 	View()
 	{
 		super("Toolbar");
@@ -103,6 +104,9 @@ public class View extends JFrame
 					
 					model.updateAll();
 					
+                                        Globals.mousePos.x = (float)(MouseInfo.getPointerInfo().getLocation().getX() - View.this.getLocation().getX());
+                                        Globals.mousePos.y = (float)(MouseInfo.getPointerInfo().getLocation().getY() - View.this.getLocation().getY());
+                                           
 					repaint();
 					Thread.sleep(16);
 				}

@@ -23,7 +23,12 @@ public class Model
     
     void updateAll()
     {
-    	for(Sheep s : sheep)
-    		s.update();
+        
+        
+    	for(Sheep s : sheep){
+            s.checkFlee(Globals.mousePos);                 
+            s.update();
+        }
+    		
     }
 }
