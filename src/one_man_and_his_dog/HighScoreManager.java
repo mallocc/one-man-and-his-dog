@@ -2,6 +2,10 @@ package one_man_and_his_dog;
 
 import java.util.*;
 import java.io.*;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 
 public class HighScoreManager {
     // An array list of the type "score" we will use to work with the scores inside the class
@@ -19,12 +23,13 @@ public class HighScoreManager {
         scores = new ArrayList<Score>();
     }
     
-	public ArrayList<Score> getScores() {
+	private ArrayList<Score> getScores() {
 	    loadScoreFile();
 	    sort();
 	    return scores;
 	}
 	
+
 	private void sort() {
 	    ScoreComparator comparator = new ScoreComparator();
 	    Collections.sort(scores, comparator);
@@ -37,7 +42,7 @@ public class HighScoreManager {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void loadScoreFile() {
+	private void loadScoreFile() {
 	    try {
 	        inputStream = new ObjectInputStream(new FileInputStream(HIGHSCORE_FILE));
 	        scores = (ArrayList<Score>) inputStream.readObject();
@@ -59,7 +64,7 @@ public class HighScoreManager {
 	    }
 	}
 	
-	public void updateScoreFile() {
+	private void updateScoreFile() {
 	    try {
 	        outputStream = new ObjectOutputStream(new FileOutputStream(HIGHSCORE_FILE));
 	        outputStream.writeObject(scores);
