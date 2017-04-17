@@ -13,4 +13,21 @@ public class Vec2
 		x = _x;
 		y = _y;
 	}
+	
+	float magnitude()
+	{
+		return (float) Math.sqrt(x*x + y*y);
+	}
+	
+	void add(Vec2 a)
+	{
+		x += a.x;
+		y += a.y;
+	}
+	
+	void sub(Vec2 a)
+	{
+		x -= a.x;
+		y -= a.y;
+	}
 }
