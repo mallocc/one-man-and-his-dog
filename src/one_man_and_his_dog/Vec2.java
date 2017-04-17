@@ -30,4 +30,9 @@ public class Vec2
 		x -= a.x;
 		y -= a.y;
 	}
+        
+        void scale(float a){
+            x *= a;
+            y *= a;
+        }
 }
