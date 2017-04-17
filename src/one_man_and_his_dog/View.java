@@ -6,11 +6,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -89,8 +94,26 @@ public class View extends JFrame
 
 	private class GameController extends JPanel implements Runnable
 	{
+		private BufferedImage scale(BufferedImage imageToScale, int dWidth, int dHeight) {
+	        BufferedImage scaledImage = null;
+	        if (imageToScale != null) {
+	            scaledImage = new BufferedImage(dWidth, dHeight, imageToScale.getType());
+	            Graphics2D graphics2D = scaledImage.createGraphics();
+	            graphics2D.drawImage(imageToScale, 0, 0, dWidth, dHeight, null);
+	            graphics2D.dispose();
+	        }
+	        return scaledImage;
+	    }
+		
+		BufferedImage img = null;
 		GameController()
 		{
+			
+			try {
+			    img = ImageIO.read(getClass().getClassLoader().getResource("resources/sheep.png"));
+			    img = scale(img, Sheep.SIZE, Sheep.SIZE);
+			} catch (IOException e) {
+			}
 			new Thread(this).start();
 		}
 
@@ -104,8 +127,8 @@ public class View extends JFrame
 					
 					model.updateAll();
 					
-                                        Globals.mousePos.x = (float)(MouseInfo.getPointerInfo().getLocation().getX() - View.this.getLocation().getX());
-                                        Globals.mousePos.y = (float)(MouseInfo.getPointerInfo().getLocation().getY() - View.this.getLocation().getY());
+					Globals.mousePos.x = (float)(MouseInfo.getPointerInfo().getLocation().getX() - View.this.getLocation().getX());
+					Globals.mousePos.y = (float)(MouseInfo.getPointerInfo().getLocation().getY() - View.this.getLocation().getY());
                                            
 					repaint();
 					Thread.sleep(16);
@@ -122,12 +145,13 @@ public class View extends JFrame
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-			g.setColor(Color.BLACK);
+			g.setColor(Color.GREEN);
 			g.fillRect(0, 0, View.WIDTH, View.HEIGHT);
 			
 			g.setColor(Color.WHITE);
 			for (Sheep s : model.getSheep())
-				g.fillOval((int) s.pos.x, (int) s.pos.y, Sheep.SIZE, Sheep.SIZE);
+				g.drawImage(img, (int)s.pos.x, (int)s.pos.y, null);
+				//g.fillOval((int) s.pos.x, (int) s.pos.y, Sheep.SIZE, Sheep.SIZE);
 
 		}
 
