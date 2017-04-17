@@ -13,11 +13,13 @@ public class Sheep
     
     // adds the velocity to the position 
     void update(){
+    	
+    	
         pos.x += vel.x;
         pos.y += vel.y;
     }
     
-    void flee(Vec2 dogPos){
+    void checkFlee(Vec2 dogPos){
         Vec2 dog2pos = new Vec2(pos.x,pos.y); 
         dog2pos.sub(dogPos);
         float distance = dog2pos.magnitude();
