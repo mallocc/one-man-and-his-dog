@@ -6,7 +6,6 @@ public class Score  implements Serializable {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private int score;
     private String name;
 
