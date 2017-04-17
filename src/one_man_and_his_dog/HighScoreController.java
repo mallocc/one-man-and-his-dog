@@ -15,7 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({ "serial", "unused", "restriction" })
 public class HighScoreController extends JPanel
 {
 	HighScoreManager hcm = new HighScoreManager();
@@ -44,10 +44,9 @@ public class HighScoreController extends JPanel
 		        };
 		DefaultTableModel tableModel = new DefaultTableModel(columns,0);
 
-	    int i = 0;
-	    int x = hcm.scores.size();
-//		System.out.println(x);
-	    while (i < x) {
+		int i = 0;
+		int x = hcm.scores.size();
+		while (i < x) {
 	    	Score s = hcm.scores.get(i);
 //			System.out.print((i+1) + "; " + hcm.getHighScoreString(s));
 			Object[] data = { i+1, s.getName(), s.getScore() };
