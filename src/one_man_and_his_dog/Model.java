@@ -5,11 +5,15 @@ import java.util.ArrayList;
 public class Model
 {
 	
-	ArrayList<Sheep> sheep = new ArrayList<Sheep>();
+    ArrayList<Sheep> sheep = new ArrayList<Sheep>();
 	
     Model()
     {
-        
+        for (int i =0; i <10; ++i){
+            sheep.add(new Sheep(new Vec2(
+                    (float)Math.random() * View.WIDTH, 
+                    (float)Math.random() * View.HEIGHT)));
+        }
     }
     
     ArrayList<Sheep> getSheep()

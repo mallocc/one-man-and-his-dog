@@ -19,6 +19,9 @@ import javax.swing.JTable;
 
 public class View extends JFrame
 {
+        public static int WIDTH = 320;
+        public static int HEIGHT = 480;
+  
 	View()
 	{
 		super("Toolbar");
@@ -35,8 +38,8 @@ public class View extends JFrame
 	{
 		this.setVisible(true);
 		this.setResizable(false);
-		this.setSize(new Dimension(720, 1280));
-		this.setLocation(300, 300);
+		this.setSize(new Dimension(WIDTH, HEIGHT));
+		this.setLocation(100, 100);
 
 		this.setContentPane(panel);
 
@@ -116,11 +119,11 @@ public class View extends JFrame
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 			g.setColor(Color.BLACK);
-			g.fillRect(0, 0, 720, 1280);
+			g.fillRect(0, 0, View.WIDTH, View.HEIGHT);
 			
 			g.setColor(Color.WHITE);
 			for (Sheep s : model.getSheep())
-				g.fillOval((int) s.pos.x, (int) s.pos.y, 50, 50);
+				g.fillOval((int) s.pos.x, (int) s.pos.y, Sheep.SIZE, Sheep.SIZE);
 
 		}
 

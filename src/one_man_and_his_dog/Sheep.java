@@ -2,13 +2,19 @@ package one_man_and_his_dog;
 
 public class Sheep
 {
+    public static int SIZE = 25;
+    
     Vec2 pos, vel;
     int acc;
     
     // initialise the sheep
     Sheep(){
-        Vec2 pos = new Vec2();
-        Vec2 vel = new Vec2();
+         pos = new Vec2();
+         vel = new Vec2();
+    }
+    Sheep(Vec2 pos){
+        this.pos = pos;
+        this.vel = new Vec2();
     }
     
     // adds the velocity to the position 
