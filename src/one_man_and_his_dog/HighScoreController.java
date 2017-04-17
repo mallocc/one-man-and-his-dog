@@ -50,7 +50,7 @@ public class HighScoreController extends JPanel
 	    while (i < x) {
 	    	Score s = hcm.scores.get(i);
 //			System.out.print((i+1) + "; " + hcm.getHighScoreString(s));
-			Object[] data = { i+1, s.getName(), String.valueOf(s.getScore()) };
+			Object[] data = { i+1, s.getName(), s.getScore() };
 			tableModel.addRow(data);
 			i++;
 		}
